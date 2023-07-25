@@ -1,0 +1,21 @@
+.header {
+  @apply relative h-[90vh];
+}
+.image {
+  @apply object-cover max-h-[100%];
+}
+.info {
+  @apply absolute top-0 left-0 z-10 w-full h-full capitalize;
+}
+.infoWrapper {
+  @apply container flex flex-col justify-center h-full;
+}
+.titleInfo {
+  @apply font-bold text-white text-50;
+}
+.subTitleInfo {
+  @apply md:max-w-[50%] text-gray-500 text-18;
+}
+.button {
+  @apply flex items-center py-3 mt-8 font-bold transition-all duration-500 bg-white rounded-md hover:bg-opacity-90 gap-x-2 px-11 md:w-fit;
+}

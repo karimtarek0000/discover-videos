@@ -1,0 +1,12 @@
+.navbar {
+  @apply py-3 bg-primary;
+}
+.navbarWrapper {
+  @apply container flex items-center;
+}
+.links {
+  @apply space-x-4 text-white text-18;
+}
+.button {
+  @apply px-5 py-2 text-white rounded-md ms-auto bg-secondary;
+}
