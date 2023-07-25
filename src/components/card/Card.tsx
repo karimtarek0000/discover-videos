@@ -16,7 +16,10 @@ const Card = (props: CardProps): JSX.Element => {
     large: cardLarge,
   };
 
-  const errorImgHandler = (): void => setImgSrc("/images/clifford.webp");
+  const errorImgHandler = (): void =>
+    setImgSrc(
+      "https://images.unsplash.com/photo-1585647347384-2593bc35786b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+    );
 
   return (
     <Link href="/" className={`${card} ${cardStyle[type]}`}>
