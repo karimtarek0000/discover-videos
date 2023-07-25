@@ -1,4 +1,5 @@
 import { ReactComponentElement, cloneElement } from "react";
+import Style from "./grid.module.css";
 
 type RenderComponentsProps = {
   items: object[];
@@ -11,13 +12,7 @@ const Grids = ({ items, children, className }: RenderComponentsProps): JSX.Eleme
     return cloneElement(children, { item, key: item.id });
   });
 
-  return (
-    <div
-      className={`container justify-center max-md:px-3 gap-3 grid sm:grid-cols-2 lg:grid-cols-4 ${className}`}
-    >
-      {renderComponents}
-    </div>
-  );
+  return <div className={`${Style.grid} ${className}`}>{renderComponents}</div>;
 };
 
 export default Grids;
