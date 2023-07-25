@@ -10,7 +10,13 @@ const Navbar = (): JSX.Element => {
     <nav className={navbar}>
       <div className={navbarWrapper}>
         <Link href="/" className="lg:me-[12.5rem]">
-          <Image src="/images/netflix.svg" alt="logo" width="150" height="50" />
+          <Image
+            src="/images/netflix.svg"
+            alt="logo"
+            width={0}
+            height={0}
+            className="w-[6.25rem] md:w-[9.375rem]"
+          />
         </Link>
 
         <div className={links}>

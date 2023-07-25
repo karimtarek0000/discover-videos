@@ -10,6 +10,7 @@
 
   body {
     @apply bg-black;
+    height: 10000px;
   }
 }
 

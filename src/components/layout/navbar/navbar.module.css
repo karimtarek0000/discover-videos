@@ -1,11 +1,11 @@
 .navbar {
-  @apply absolute inset-0 top-0 z-20 py-4 h-fit;
+  @apply fixed top-0 z-20 w-full bg-black bg-opacity-20 h-fit;
 }
 .navbarWrapper {
-  @apply container flex items-center;
+  @apply container flex items-center py-5;
 }
 .links {
-  @apply space-x-4 text-white text-18;
+  @apply space-x-4 text-white capitalize text-18;
 }
 .button {
   @apply px-5 py-2 text-white rounded-md ms-auto bg-secondary;

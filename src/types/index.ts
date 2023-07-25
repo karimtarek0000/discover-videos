@@ -4,3 +4,8 @@ export type HeaderProps = {
   imgUrl: string;
   type?: string;
 };
+
+export type CardProps = {
+  type?: "small" | "medium" | "large";
+  imgUrl: string;
+};

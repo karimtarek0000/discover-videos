@@ -17,12 +17,12 @@ const DropDown = (): JSX.Element => {
         <RenderSVG name="arrow-down" size="0.8rem" />
       </button>
 
-      {toggle ? (
+      {toggle && (
         <div className={dropdownList}>
           <RenderSVG name="logout" size="1rem" />
           <Link href="/logout">Logout</Link>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

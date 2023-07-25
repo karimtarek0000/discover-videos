@@ -10,7 +10,16 @@ const Header = (props: HeaderProps): JSX.Element => {
 
   return (
     <header className={header}>
-      <Image className={image} src={imgUrl} alt={title} width="2000" height="1334" />
+      <Image
+        className={image}
+        src={imgUrl}
+        alt={title}
+        width={0}
+        height={0}
+        sizes="(min-width:1024px) 100vw, 30vw"
+        priority={true}
+        style={{ width: "100%", height: "auto" }}
+      />
 
       <div className={info}>
         <div className={infoWrapper}>
@@ -21,7 +30,7 @@ const Header = (props: HeaderProps): JSX.Element => {
           <h1 className={titleInfo}>{title}</h1>
           <p className={subTitleInfo}>{subTitle}</p>
           <button className={button}>
-            <RenderSVG name="play" size="1.5rem" />
+            <RenderSVG name="play" size="1.2rem" />
             Play
           </button>
         </div>
