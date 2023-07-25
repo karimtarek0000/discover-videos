@@ -8,9 +8,9 @@ const Navbar = (): JSX.Element => {
   return (
     <nav className={navbar}>
       <div className={navbarWrapper}>
-        <div className="lg:me-[12.5rem]">
+        <Link href="/" className="lg:me-[12.5rem]">
           <Image src="/images/netflix.svg" alt="logo" width="150" height="50" />
-        </div>
+        </Link>
 
         <div className={links}>
           <Link href="/">Home</Link>

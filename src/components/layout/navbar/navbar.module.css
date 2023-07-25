@@ -1,5 +1,5 @@
 .navbar {
-  @apply py-3 bg-primary;
+  @apply absolute inset-0 top-0 z-20 py-4 h-fit;
 }
 .navbarWrapper {
   @apply container flex items-center;
