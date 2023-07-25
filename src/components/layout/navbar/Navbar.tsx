@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Style from "./navbar.module.css";
+import DropDown from "../dropdown/DropDown";
 
 const { navbar, navbarWrapper, links, button } = Style;
 
@@ -17,7 +18,8 @@ const Navbar = (): JSX.Element => {
           <Link href="/">My list</Link>
         </div>
 
-        <button className={button}>Sign up</button>
+        {/* <button className={button}>Sign up</button> */}
+        <DropDown />
       </div>
     </nav>
   );

@@ -1,0 +1,6 @@
+.dropdown {
+  @apply relative text-white h-fit ms-auto;
+}
+.dropdownList {
+  @apply absolute inset-0 flex items-center justify-center px-3 py-2 text-center bg-black rounded-md top-8 h-fit gap-x-2;
+}
