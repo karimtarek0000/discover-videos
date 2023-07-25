@@ -1,15 +1,12 @@
 .card {
-  @apply block overflow-hidden rounded-md w-fit;
+  @apply block w-full overflow-hidden rounded-md;
 }
-.cardSmall img {
-  width: 18.75rem;
-  height: 10.625rem;
+.cardSmall {
+  @apply h-[10.625rem];
 }
-.cardMedium img {
-  width: 9.875rem;
-  height: 17.5rem;
+.cardMedium {
+  @apply h-[17.5rem];
 }
-.cardLarge img {
-  width: 18.625rem;
-  height: 31.125rem;
+.cardLarge {
+  @apply h-[31.125rem];
 }

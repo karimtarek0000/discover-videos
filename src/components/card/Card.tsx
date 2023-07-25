@@ -28,8 +28,8 @@ const Card = (props: CardProps): JSX.Element => {
         alt="test"
         width={0}
         height={0}
-        sizes="(min-width: 64rem) 18.75rem, 6.25rem"
-        style={{ objectFit: "cover", objectPosition: "center" }}
+        sizes="(min-width: 64rem) 18.75rem, 14rem"
+        style={{ objectFit: "cover", objectPosition: "center", width: "100%", height: "100%" }}
         onError={errorImgHandler}
       />
     </Link>

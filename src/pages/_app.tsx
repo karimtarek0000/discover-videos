@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import { LazyMotion, domAnimation } from "framer-motion";
 import type { AppProps } from "next/app";
 import { Roboto } from "next/font/google";
 
@@ -12,7 +13,9 @@ export default function App({ Component, pageProps }: AppProps) {
           font-family: ${inter.style.fontFamily};
         }
       `}</style>
-      <Component {...pageProps} />
+      <LazyMotion features={domAnimation}>
+        <Component {...pageProps} />
+      </LazyMotion>
     </>
   );
 }
