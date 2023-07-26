@@ -1,8 +1,7 @@
 import Card from "@/components/card/Card";
 import Header from "@/components/layout/header/Header";
 import Navbar from "@/components/layout/navbar/Navbar";
-import Grids from "@/components/shared/grids/Grids";
-import { m } from "framer-motion";
+import SectionCard from "@/components/sectionCard/SectionCard";
 
 export default function Home() {
   const items = [
@@ -10,6 +9,10 @@ export default function Home() {
     { id: 2, name: "" },
     { id: 3, name: "" },
     { id: 4, name: "" },
+    { id: 5, name: "" },
+    { id: 6, name: "" },
+    { id: 7, name: "" },
+    { id: 8, name: "" },
   ];
 
   return (
@@ -21,13 +24,9 @@ export default function Home() {
         subTitle="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim facere molestiae deserunt. Maxime, aut consequuntur eos quaerat sunt cumque aliquid!"
       />
       <main>
-        <section className="mt-24">
-          <Grids items={items}>
-            <m.div initial={false} whileHover={{ scale: 1.2 }}>
-              <Card type="large" imgUrl="/images/clifford.webp" />
-            </m.div>
-          </Grids>
-        </section>
+        <SectionCard head="desiny" items={items}>
+          <Card type="large" imgUrl="/images/clifford.webp" />
+        </SectionCard>
       </main>
     </>
   );

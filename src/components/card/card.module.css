@@ -1,5 +1,5 @@
 .card {
-  @apply block w-full overflow-hidden rounded-md;
+  @apply block overflow-hidden rounded-md w-[18.75rem];
 }
 .cardSmall {
   @apply h-[10.625rem];
