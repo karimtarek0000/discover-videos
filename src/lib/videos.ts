@@ -1,18 +1,23 @@
 import { Video } from "@/types";
-// import data from "../data/videos.json";
+import fetchData from "@/utils/fetchData";
 
-const videosData = async (query: string) => {
+const API_KEY = process.env.YOUTUBE_API_KEY;
+
+const videosData = async (query: string, typeURL = "videos") => {
   try {
-    const API_KEY = process.env.YOUTUBE_API_KEY;
+    const URL: any = {
+      videos: `${process.env.YOUTUBE_URL}/search?part=snippet&maxResults=25&q=${query}&key=${API_KEY}`,
+      popular: `${process.env.YOUTUBE_URL}/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=${query}&maxResults=25&regionCode=US&key=${API_KEY}`,
+    };
 
-    const res = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${API_KEY}`
-    );
-    const data = await res.json();
+    const data = await fetchData(URL[typeURL]);
 
-    if (data?.error) return [];
+    if (data?.error) {
+      console.error("Error", data.error);
+      return [];
+    }
 
-    return data?.items.map((item: any): Video => {
+    return data?.items?.map((item: any): Video => {
       return {
         id: item.id?.videoId || item.id,
         title: item.snippet.title || "",

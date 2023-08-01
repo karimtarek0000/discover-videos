@@ -16,9 +16,9 @@ const Header = (props: HeaderProps): JSX.Element => {
         alt={title}
         width={0}
         height={0}
-        sizes="(min-width:1024px) 100vw, 30vw"
+        sizes="(min-width:1024px) 100vw, 70vw"
         priority={true}
-        style={{ width: "100%", height: "auto" }}
+        style={{ width: "100%", height: "100%" }}
       />
 
       <div className={info}>

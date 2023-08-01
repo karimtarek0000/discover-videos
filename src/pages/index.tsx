@@ -7,17 +7,18 @@ import { HomeProps } from "@/types";
 import Head from "next/head";
 
 export async function getServerSideProps() {
-  const [disneyVideos, travelVideos, productivityVideos] = await Promise.all([
+  const [disneyVideos, travelVideos, productivityVideos, mostPopularVideos] = await Promise.all([
     videosData("disney trailer"),
     videosData("travel"),
     videosData("productivity"),
+    videosData("mostPopular", "popular"),
   ]);
 
-  return { props: { disneyVideos, travelVideos, productivityVideos } };
+  return { props: { disneyVideos, travelVideos, productivityVideos, mostPopularVideos } };
 }
 
 export default function Home(props: HomeProps) {
-  const { disneyVideos, travelVideos, productivityVideos } = props;
+  const { disneyVideos, travelVideos, productivityVideos, mostPopularVideos } = props;
 
   return (
     <>
@@ -33,13 +34,16 @@ export default function Home(props: HomeProps) {
       />
       <main>
         <SectionCard head="desiny" items={disneyVideos}>
-          <Card type="large" />
+          <Card type="medium" />
         </SectionCard>
         <SectionCard head="travel" items={travelVideos}>
           <Card type="small" />
         </SectionCard>
         <SectionCard head="productivity" items={productivityVideos}>
           <Card type="medium" />
+        </SectionCard>
+        <SectionCard head="popular" items={mostPopularVideos}>
+          <Card type="small" />
         </SectionCard>
       </main>
     </>

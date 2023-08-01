@@ -30,4 +30,5 @@ export type HomeProps = {
   disneyVideos: Video[];
   travelVideos: Video[];
   productivityVideos: Video[];
+  mostPopularVideos: Video[];
 };
