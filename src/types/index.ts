@@ -8,12 +8,26 @@ export type HeaderProps = {
 };
 
 export type CardProps = {
-  type?: "small" | "medium" | "large";
+  id: string;
+  title: string;
   imgUrl: string;
+  type?: "small" | "medium" | "large";
 };
 
 export type SectionCardProps = {
   head: string;
   items: any;
   children: ReactComponentElement<any>;
+};
+
+export type Video = {
+  id: string;
+  title: string;
+  imgUrl: string;
+};
+
+export type HomeProps = {
+  disneyVideos: Video[];
+  travelVideos: Video[];
+  productivityVideos: Video[];
 };

@@ -8,9 +8,7 @@ const SectionCard = (props: SectionCardProps): JSX.Element => {
   return (
     <section className="container mt-24">
       <h2 className="-mb-5 text-white capitalize md:ps-4 text-40">{head}</h2>
-      <Grids items={items}>
-        <m.div whileHover={{ scale: 1.1 }}>{children}</m.div>
-      </Grids>
+      <Grids items={items}>{children}</Grids>
     </section>
   );
 };
