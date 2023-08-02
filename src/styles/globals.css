@@ -10,7 +10,6 @@
 
   body {
     @apply bg-black;
-    height: 10000px;
   }
 }
 
@@ -22,4 +21,13 @@
 
 ::-webkit-scrollbar {
   width: 0px;
+}
+
+input {
+  all: unset;
+}
+
+img {
+  user-select: none;
+  pointer-events: none;
 }
