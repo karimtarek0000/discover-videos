@@ -2,6 +2,7 @@ import Card from "@/components/card/Card";
 import Header from "@/components/layout/header/Header";
 import Navbar from "@/components/layout/navbar/Navbar";
 import SectionCard from "@/components/sectionCard/SectionCard";
+import { LayoutDefault } from "@/layouts/default";
 import videosData from "@/lib/videos";
 import { HomeProps } from "@/types";
 import Head from "next/head";
@@ -26,7 +27,9 @@ export default function Home(props: HomeProps) {
         <title>Netflix</title>
         <meta name="description" content="Discover videos" />
       </Head>
+
       <Navbar />
+
       <Header
         title="john wick"
         imgUrl="/images/clifford.webp"

@@ -17,5 +17,5 @@
   @apply px-3 py-4 bg-white rounded-md;
 }
 .loginBtn {
-  @apply block w-full py-3 mt-4 text-white bg-red-700 rounded-md text-18;
+  @apply w-full py-3 mt-4 text-white bg-red-700 rounded-md text-18;
 }

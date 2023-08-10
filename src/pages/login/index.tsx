@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
 import Style from "../../styles/login.module.css";
 import { magic } from "../../lib/maginLinkClient";
+import useRouterEvents from "@/hooks/useRouterEvents";
 
 const { formWrapper, title, inputWrapper, loginBtn } = Style;
 
@@ -13,6 +14,7 @@ const Login = (): JSX.Element => {
   const [email, setEmail] = useState<string>();
   const [statusEmail, setStatusEmail] = useState<boolean>(false);
   const [err, setErr] = useState<string>("");
+  const { loading, setLoading } = useRouterEvents({});
 
   useEffect(() => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -43,13 +45,10 @@ const Login = (): JSX.Element => {
     e.preventDefault();
 
     try {
-      const DIDtoken = await magic.auth.loginWithMagicLink({
-        email,
-      });
-      setEmail("");
-      console.log(DIDtoken);
-
-      // router.replace("/");
+      setLoading(true);
+      setStatusEmail(false);
+      const DIDtoken = await magic.auth.loginWithMagicLink({ email });
+      router.replace("/");
     } catch (err) {
       console.log(err);
     }
@@ -95,8 +94,13 @@ const Login = (): JSX.Element => {
             <p className="mt-2 text-center text-white">{err}</p>
           </div>
 
-          <button onClick={loginHandler} disabled={!statusEmail} className={loginBtn}>
+          <button
+            onClick={loginHandler}
+            disabled={!statusEmail}
+            className={`flex items-center justify-center gap-x-1 ${loginBtn}`}
+          >
             Sign in
+            {loading && <span className="loader"></span>}
           </button>
         </form>
       </div>

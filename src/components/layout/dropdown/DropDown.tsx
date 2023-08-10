@@ -3,30 +3,46 @@ import { useState } from "react";
 import Style from "./dropdown.module.css";
 import RenderSVG from "@/components/shared/RenderSVG";
 import { useRouter } from "next/router";
+import { magic } from "@/lib/maginLinkClient";
 
 const { dropdown, dropdownList } = Style;
 
-const DropDown = (): JSX.Element => {
+const DropDown = ({ email }: { email: string }): JSX.Element => {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const [toggle, setToggle] = useState<boolean>(false);
 
   const toggleHandler = () => setToggle(!toggle);
 
-  const logoutHandler = () => {
-    router.replace("/login");
+  const logoutHandler = async () => {
+    try {
+      setLoading(true);
+      await magic.user.logout();
+      router.replace("/login");
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <div className={dropdown}>
       <button className="flex items-center gap-x-2" onClick={toggleHandler}>
-        karim@gmail.com
+        {email}
         <RenderSVG name="arrow-down" size="0.8rem" />
       </button>
 
       {toggle && (
         <div className={dropdownList}>
           <RenderSVG name="logout" size="1rem" />
-          <button onClick={logoutHandler}>Logout</button>
+          <button
+            onClick={logoutHandler}
+            disabled={loading}
+            className={`flex items-center justify-center gap-x-1`}
+          >
+            Logout
+            {loading && <span className="loader"></span>}
+          </button>
         </div>
       )}
     </div>

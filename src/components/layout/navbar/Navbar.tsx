@@ -2,10 +2,27 @@ import Logo from "@/components/shared/logo/Logo";
 import Link from "next/link";
 import DropDown from "../dropdown/DropDown";
 import Style from "./navbar.module.css";
+import { useEffect, useState } from "react";
+import { magic } from "@/lib/maginLinkClient";
 
 const { navbar, navbarWrapper, links, button } = Style;
 
 const Navbar = (): JSX.Element => {
+  const [email, setEmail] = useState<string>("");
+
+  useEffect(() => {
+    const userInfo = async () => {
+      try {
+        const { email, publicAddress } = await magic.user.getMetadata();
+        if (email) setEmail(email);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    userInfo();
+  }, []);
+
   return (
     <nav className={navbar}>
       <div className={navbarWrapper}>
@@ -17,7 +34,7 @@ const Navbar = (): JSX.Element => {
         </div>
 
         {/* <button className={button}>Sign up</button> */}
-        <DropDown />
+        <DropDown email={email} />
       </div>
     </nav>
   );
