@@ -14,7 +14,7 @@ const Login = (): JSX.Element => {
   const [email, setEmail] = useState<string>();
   const [statusEmail, setStatusEmail] = useState<boolean>(false);
   const [err, setErr] = useState<string>("");
-  const { loading, setLoading } = useRouterEvents({});
+  const { loading, setLoading } = useRouterEvents();
 
   useEffect(() => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -47,7 +47,7 @@ const Login = (): JSX.Element => {
     try {
       setLoading(true);
       setStatusEmail(false);
-      const DIDtoken = await magic.auth.loginWithMagicLink({ email });
+      await magic.auth.loginWithMagicLink({ email });
       router.replace("/");
     } catch (err) {
       console.log(err);

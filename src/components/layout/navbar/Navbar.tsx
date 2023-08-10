@@ -13,7 +13,7 @@ const Navbar = (): JSX.Element => {
   useEffect(() => {
     const userInfo = async () => {
       try {
-        const { email, publicAddress } = await magic.user.getMetadata();
+        const { email } = await magic.user.getMetadata();
         if (email) setEmail(email);
       } catch (err) {
         console.log(err);
