@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
 import Style from "../../styles/login.module.css";
+import { magic } from "../../lib/maginLinkClient";
 
 const { formWrapper, title, inputWrapper, loginBtn } = Style;
 
@@ -38,10 +39,20 @@ const Login = (): JSX.Element => {
     setEmail(e.target.value);
   };
 
-  const loginHandler = (e: any) => {
+  const loginHandler = async (e: any) => {
     e.preventDefault();
 
-    // router.replace("/");
+    try {
+      const DIDtoken = await magic.auth.loginWithMagicLink({
+        email,
+      });
+      setEmail("");
+      console.log(DIDtoken);
+
+      // router.replace("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
