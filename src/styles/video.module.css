@@ -1,6 +1,12 @@
 .videoWrapper {
-  @apply flex flex-col items-center md:w-[50rem] max-w-[50rem] mx-auto px-3 h-screen;
+  @apply flex flex-col items-center md:w-[50rem] max-w-[50rem] mt-[5rem] mx-auto px-3 min-h-screen;
 }
 .btnBack {
   @apply self-start my-5 text-white;
+}
+.btnBack svg {
+  @apply hover:-translate-x-[5px] transition-transform duration-150;
+}
+.info {
+  @apply flex justify-between mt-5 text-white max-md:px-5 max-lg:flex-wrap;
 }

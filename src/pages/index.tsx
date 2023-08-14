@@ -39,7 +39,7 @@ export default function Home(props: HomeProps) {
       />
       <main>
         <SectionCard head="desiny" items={disneyVideos}>
-          <Card type="medium" />
+          <Card type="large" />
         </SectionCard>
         <SectionCard head="travel" items={travelVideos}>
           <Card type="small" />
