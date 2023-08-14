@@ -32,8 +32,10 @@ export default function Home(props: HomeProps) {
 
       <Header
         title="john wick"
-        imgUrl="/images/clifford.webp"
+        type="movies"
+        imgUrl="/images/john-wick.jpg"
         subTitle="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim facere molestiae deserunt. Maxime, aut consequuntur eos quaerat sunt cumque aliquid!"
+        videoId="qEVUtrk8_B4"
       />
       <main>
         <SectionCard head="desiny" items={disneyVideos}>

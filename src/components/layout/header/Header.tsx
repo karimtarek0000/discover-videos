@@ -2,11 +2,18 @@ import RenderSVG from "@/components/shared/RenderSVG";
 import { HeaderProps } from "@/types";
 import Image from "next/image";
 import Style from "./header.module.css";
+import { MouseEventHandler } from "react";
+import { useRouter } from "next/router";
 
 const { header, image, info, infoWrapper, titleInfo, subTitleInfo, button } = Style;
 
 const Header = (props: HeaderProps): JSX.Element => {
-  const { title, subTitle, type = "series", imgUrl } = props;
+  const router = useRouter();
+  const { title, subTitle, type = "series", imgUrl, videoId } = props;
+
+  const playHandler: MouseEventHandler = (): void => {
+    router.push(`/video/${videoId}`);
+  };
 
   return (
     <header className={header}>
@@ -29,7 +36,7 @@ const Header = (props: HeaderProps): JSX.Element => {
           </div>
           <h1 className={titleInfo}>{title}</h1>
           <p className={subTitleInfo}>{subTitle}</p>
-          <button className={button}>
+          <button onClick={playHandler} className={button}>
             <RenderSVG name="play" size="1.2rem" />
             Play
           </button>

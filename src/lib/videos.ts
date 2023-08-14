@@ -8,6 +8,8 @@ const videosData = async (query: string, typeURL = "videos") => {
     const URL: any = {
       videos: `${process.env.YOUTUBE_URL}/search?part=snippet&maxResults=25&q=${query}&key=${API_KEY}`,
       popular: `${process.env.YOUTUBE_URL}/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=${query}&maxResults=25&regionCode=US&key=${API_KEY}`,
+      video: `${process.env.YOUTUBE_URL}/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${query}&key=${API_KEY}
+      `,
     };
 
     const data = await fetchData(URL[typeURL]);
@@ -18,10 +20,16 @@ const videosData = async (query: string, typeURL = "videos") => {
     }
 
     return data?.items?.map((item: any): Video => {
+      const snippet = item?.snippet;
+
       return {
         id: item.id?.videoId || item.id,
-        title: item.snippet.title || "",
-        imgUrl: item.snippet.thumbnails.high.url,
+        title: snippet.title || "",
+        imgUrl: snippet.thumbnails.high.url,
+        description: snippet.description,
+        publishTime: snippet.publishedAt,
+        channelTitle: snippet.channelTitle,
+        statistics: item?.statistics ? item?.statistics : { viewCount: 0 },
       };
     });
   } catch (error) {

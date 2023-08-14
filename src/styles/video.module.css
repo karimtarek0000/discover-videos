@@ -1,0 +1,6 @@
+.videoWrapper {
+  @apply flex flex-col items-center md:w-[50rem] max-w-[50rem] mx-auto px-3 h-screen;
+}
+.btnBack {
+  @apply self-start my-5 text-white;
+}

@@ -5,6 +5,7 @@ export type HeaderProps = {
   subTitle: string;
   imgUrl: string;
   type?: string;
+  videoId: string;
 };
 
 export type CardProps = {
@@ -24,6 +25,12 @@ export type Video = {
   id: string;
   title: string;
   imgUrl: string;
+  description: string;
+  publishTime: string;
+  channelTitle: string;
+  statistics: {
+    viewCount: number;
+  };
 };
 
 export type HomeProps = {

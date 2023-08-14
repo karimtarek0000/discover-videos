@@ -22,6 +22,7 @@ module.exports = {
       fontFamily: "var(--font-roboto)",
       fontSize: {
         18: ["1.125rem", "2rem"],
+        25: "1.5625rem",
         40: ["2.5rem"],
         50: ["3.125rem"],
       },

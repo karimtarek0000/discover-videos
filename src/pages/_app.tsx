@@ -11,20 +11,25 @@ const inter = Roboto({ subsets: ["latin"], weight: ["400", "700"], variable: "--
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const { loading } = useRouterEvents({ status: true });
+  const { loading } = useRouterEvents({ status: false });
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const isLoggedIn = await magic.user.isLoggedIn();
-        isLoggedIn ? router.replace("/") : router.replace("/login");
-      } catch (err) {
-        router.replace("/login");
-        console.log(err);
-      }
-    })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const isLoggedIn = await magic.user.isLoggedIn();
+  //       if (!isLoggedIn) {
+  //         router.replace("/login");
+  //       }
+  //       if (isLoggedIn && router.asPath === "/login") {
+  //         router.replace("/");
+  //       }
+  //     } catch (err) {
+  //       router.replace("/login");
+  //       console.log(err);
+  //     }
+  //   })();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <>
