@@ -1,10 +1,10 @@
-import { useRouter } from "next/router";
-import Style from "../../styles/video.module.css";
+import Navbar from "@/components/layout/navbar/Navbar";
+import RenderSVG from "@/components/shared/RenderSVG";
+import { formatDate } from "@/lib/formatDate";
 import videosData from "@/lib/videos";
 import { Video } from "@/types";
-import Navbar from "@/components/layout/navbar/Navbar";
-import { formatDate } from "@/lib/formatDate";
-import RenderSVG from "@/components/shared/RenderSVG";
+import { useRouter } from "next/router";
+import Style from "../../styles/video.module.css";
 import { startFetchMyQuery } from "@/db/hasura";
 
 const { videoWrapper, btnBack, info } = Style;
@@ -35,6 +35,8 @@ const VideoDetails = ({ video }: { video: Video }): JSX.Element => {
   const { query, back } = useRouter();
 
   const { title, description, publishTime, statistics, channelTitle } = video;
+
+  console.log(startFetchMyQuery());
 
   return (
     <>
