@@ -5,6 +5,7 @@ import { Video } from "@/types";
 import Navbar from "@/components/layout/navbar/Navbar";
 import { formatDate } from "@/lib/formatDate";
 import RenderSVG from "@/components/shared/RenderSVG";
+import { startFetchMyQuery } from "@/db/hasura";
 
 const { videoWrapper, btnBack, info } = Style;
 
