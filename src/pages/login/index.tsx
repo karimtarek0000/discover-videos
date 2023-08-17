@@ -1,11 +1,11 @@
 import Logo from "@/components/shared/logo/Logo";
+import useRouterEvents from "@/hooks/useRouterEvents";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
-import Style from "../../styles/login.module.css";
 import { magic } from "../../lib/maginLinkClient";
-import useRouterEvents from "@/hooks/useRouterEvents";
+import Style from "../../styles/login.module.css";
 
 const { formWrapper, title, inputWrapper, loginBtn } = Style;
 
@@ -47,7 +47,9 @@ const Login = (): JSX.Element => {
     try {
       setLoading(true);
       setStatusEmail(false);
+
       await magic.auth.loginWithMagicLink({ email });
+
       router.replace("/");
     } catch (err) {
       console.log(err);
