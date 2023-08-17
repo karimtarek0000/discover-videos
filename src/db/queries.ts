@@ -2,8 +2,8 @@ import { fetchGraphQL } from "./hasura";
 
 export async function isNewUser(issuer: string, token: string) {
   const operationsDoc = `
-      query MyQuery {
-        users(where: {issuer: {_eq: "${issuer}" }}) {
+      query IsNewUserQuery($issuer: String!) {
+        users(where: {issuer: {_eq: $issuer }}) {
           id
           email
           issuer
@@ -12,7 +12,14 @@ export async function isNewUser(issuer: string, token: string) {
       }
   `;
 
-  const { data } = await fetchGraphQL(operationsDoc, "MyQuery", {}, token);
+  const { data } = await fetchGraphQL(
+    operationsDoc,
+    "IsNewUserQuery",
+    {
+      issuer,
+    },
+    token
+  );
 
-  return data?.users?.length === 1;
+  return data?.users?.length === 0;
 }

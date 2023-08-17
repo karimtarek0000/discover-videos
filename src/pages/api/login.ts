@@ -29,10 +29,10 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
 
         const token = JWT.sign(data, process.env.TOKEN_SECRET_KEY as string, { expiresIn: "7d" });
 
-        // ----------------------- Check if user exist or not --------------------
+        // ----------------------- Check if user new or not --------------------
         const user = await isNewUser(issuer as string, token);
 
-        return res.status(200).json({ message: "User data", isUserExist: user });
+        return res.status(200).json({ message: "User data", isNewUser: user });
       }
 
       res.status(200).json({ message: "Token not exist" });
