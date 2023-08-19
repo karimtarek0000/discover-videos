@@ -29,7 +29,7 @@ export async function addNewVideo(videoData: VideoDB, token: string) {
     token
   );
 
-  return data;
+  return data?.["insert_stats_one"];
 }
 
 export async function updateVideo(videoData: VideoDB, token: string) {
