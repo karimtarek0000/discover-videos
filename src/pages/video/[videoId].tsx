@@ -5,7 +5,7 @@ import videosData from "@/lib/videos";
 import { Video } from "@/types";
 import { useRouter } from "next/router";
 import Style from "../../styles/video.module.css";
-import { startFetchMyQuery } from "@/db/hasura";
+import AddToList from "@/components/list/AddToList";
 
 const { videoWrapper, btnBack, info } = Style;
 
@@ -36,8 +36,6 @@ const VideoDetails = ({ video }: { video: Video }): JSX.Element => {
 
   const { title, description, publishTime, statistics, channelTitle } = video;
 
-  console.log(startFetchMyQuery());
-
   return (
     <>
       <Navbar />
@@ -48,13 +46,18 @@ const VideoDetails = ({ video }: { video: Video }): JSX.Element => {
         </button>
 
         {/* Video */}
-        <iframe
-          id="ytplayer"
-          typeof="text/html"
-          height="360"
-          className="w-full"
-          src={`https://www.youtube.com/embed/${query.videoId}?autoplay=0&controls=0&origin=http://example.com`}
-        ></iframe>
+        <div className="relative w-full">
+          <iframe
+            id="ytplayer"
+            typeof="text/html"
+            height="360"
+            className="w-full"
+            src={`https://www.youtube.com/embed/${query.videoId}?autoplay=0&controls=0&origin=http://example.com`}
+          ></iframe>
+
+          {/* Add on list */}
+          <AddToList />
+        </div>
 
         {/* Info */}
         <div className={info}>

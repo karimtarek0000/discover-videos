@@ -1,5 +1,7 @@
-import { isNewUser } from "@/db/queries";
+import { createNewUser, isNewUser } from "@/db/queries";
+import { setCookie } from "@/lib/cookies";
 import { magicServerAdmin } from "@/lib/magicServer";
+import { MetaData } from "@/types";
 import JWT from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -13,7 +15,7 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
         const didToken = getToken.split(" ")[1];
 
         // ----------------------- Get user data from token magic link --------------------
-        const { email, issuer } = await magicServerAdmin.users.getMetadataByToken(
+        const { email, issuer, publicAddress } = await magicServerAdmin.users.getMetadataByToken(
           didToken as string
         );
 
@@ -30,14 +32,19 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
         const token = JWT.sign(data, process.env.TOKEN_SECRET_KEY as string, { expiresIn: "7d" });
 
         // ----------------------- Check if user new or not --------------------
-        const user = await isNewUser(issuer as string, token);
+        const userStatus = await isNewUser(issuer as string, token);
 
-        return res.status(200).json({ message: "User data", isNewUser: user });
+        if (userStatus) {
+          await createNewUser({ email, issuer, publicAddress } as MetaData, token);
+        }
+
+        setCookie(token, res);
+        return res.status(200).json({ message: "User Done" });
       }
 
-      res.status(200).json({ message: "Token not exist" });
+      res.status(400).json({ message: "Token not exist" });
     } catch (error) {
-      res.status(400).json({ message: "fail", error });
+      res.status(400).json({ message: "Error", error });
     }
   }
 }

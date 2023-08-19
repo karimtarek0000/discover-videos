@@ -1,0 +1,3 @@
+.addToListBtn {
+  @apply flex justify-center items-center absolute bottom-[3.125rem] start-[3.75rem] w-[4.375rem] h-[4.375rem] rounded-full bg-red-600/90;
+}

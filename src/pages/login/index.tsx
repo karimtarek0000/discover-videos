@@ -48,7 +48,15 @@ const Login = (): JSX.Element => {
       setLoading(true);
       setStatusEmail(false);
 
-      await magic.auth.loginWithMagicLink({ email });
+      const didToken = await magic.auth.loginWithMagicLink({ email });
+
+      await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${didToken}`,
+          "Content-Type": "application/json",
+        },
+      });
 
       router.replace("/");
     } catch (err) {

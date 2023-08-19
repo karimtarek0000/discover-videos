@@ -39,3 +39,9 @@ export type HomeProps = {
   productivityVideos: Video[];
   mostPopularVideos: Video[];
 };
+
+export type MetaData = {
+  email: string;
+  issuer: string;
+  publicAddress: string;
+};
