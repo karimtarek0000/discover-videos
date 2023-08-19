@@ -45,3 +45,10 @@ export type MetaData = {
   issuer: string;
   publicAddress: string;
 };
+
+export type VideoDB = {
+  userId: string;
+  videoId: string;
+  favorited: number;
+  watched: boolean;
+};

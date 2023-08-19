@@ -22,6 +22,8 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
         // ----------------------- Create token and send this token to hasura --------------------
         const data = {
           email: email,
+          issuer,
+          publicAddress,
           "https://hasura.io/jwt/claims": {
             "x-hasura-default-role": "user",
             "x-hasura-allowed-roles": ["user", "admin"],
