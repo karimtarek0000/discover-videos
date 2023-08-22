@@ -3,44 +3,52 @@ import JWT from "jsonwebtoken";
 import { addNewVideo, findVideoIdByUserId, updateVideo } from "@/db/queries";
 
 export default async function updateStats(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === "POST") {
-    try {
-      const token = req.cookies?.token;
+  try {
+    const token = req.cookies?.token;
+
+    // ------------------ Check if token exist ------------------------
+    if (!token) return res.status(403).json({ message: "Token is not exist" });
+
+    // ------------------ After that check token valid ------------------------
+    const decoded: any = JWT.verify(token, process.env.TOKEN_SECRET_KEY!);
+    if (!decoded.issuer) return res.status(400).json({ message: "Token is not valid" });
+
+    const { issuer: userId } = decoded as any;
+
+    // ----- POST -----
+    if (req.method === "POST") {
       const { videoId, favorited = 0, watched = true } = req.body;
 
-      // ------------------ Check if token exist ------------------------
-      if (!token) return res.status(403).json({ message: "Token is not exist" });
+      if (videoId) {
+        const videoExist = await findVideoIdByUserId(userId, videoId, token);
 
-      // -------- Check if data exist in body or not --------------------
-      if (!videoId) return res.status(400).json({ message: "Some data is missing!" });
-
-      // ------------------ After that check token valid ------------------------
-      return JWT.verify(token, process.env.TOKEN_SECRET_KEY!, async (err, decoded) => {
-        // -------- If token not valid will return to the client status 403
-        if (err) return res.status(403).json({ message: "Token is not valid" });
-
-        // ------ Check if video id exist or not and get video with id --------
-        if (videoId) {
-          const { issuer: userId } = decoded as any;
-
-          const isVideoExist = await findVideoIdByUserId(userId, videoId, token);
-
-          // ----- If video exist will updated if not will create new video -----
-          if (isVideoExist) {
-            const video = await updateVideo({ userId, videoId, favorited, watched }, token);
-
-            return res.status(200).json({ message: "Update video", video });
-          }
-
-          const video = await addNewVideo({ userId, videoId, favorited, watched }, token);
-
-          res.status(201).json({ message: "New video created", video });
-        } else {
-          res.status(400).json({ message: "Video id not exist" });
+        if (videoExist.length) {
+          const video = await updateVideo({ userId, videoId, favorited, watched }, token);
+          return res.status(200).json({ message: "Update video", video });
         }
-      });
-    } catch (error) {
-      res.status(400).json({ message: "Error", error });
+
+        const video = await addNewVideo({ userId, videoId, favorited, watched }, token);
+        res.status(201).json({ message: "New video created", video });
+      } else {
+        res.status(400).json({ message: "Video id not exist" });
+      }
     }
+
+    // ------ GET ------
+    if (req.method === "GET") {
+      const videoId = req.query.videoId as string;
+
+      if (videoId) {
+        const videoExist = await findVideoIdByUserId(userId, videoId, token);
+
+        videoExist.length
+          ? res.status(200).json({ message: "Video", video: videoExist })
+          : res.status(200).json({ message: "Video not exist" });
+      } else {
+        res.status(400).json({ message: "Video id not exist" });
+      }
+    }
+  } catch (error) {
+    res.status(400).json({ message: "Error", error });
   }
 }

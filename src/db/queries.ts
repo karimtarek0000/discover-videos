@@ -81,6 +81,8 @@ export async function findVideoIdByUserId(userId: string, videoId: string, token
         ) {
         id
         video_id
+        watched
+        favorited
       }
     }
   `;
@@ -95,7 +97,7 @@ export async function findVideoIdByUserId(userId: string, videoId: string, token
     token
   );
 
-  return data?.stats?.length > 0;
+  return data?.stats;
 }
 
 // --------------------------- User ---------------------------
