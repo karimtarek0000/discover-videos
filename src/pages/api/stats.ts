@@ -9,7 +9,7 @@ export default async function updateStats(req: NextApiRequest, res: NextApiRespo
     // ------------------ Check if token exist ------------------------
     if (!token) return res.status(403).json({ message: "Token is not exist" });
 
-    // ------------------ After that check token valid ------------------------
+    // ------------------ After that check token is valid ------------------------
     const decoded: any = JWT.verify(token, process.env.TOKEN_SECRET_KEY!);
     if (!decoded.issuer) return res.status(400).json({ message: "Token is not valid" });
 
@@ -42,7 +42,7 @@ export default async function updateStats(req: NextApiRequest, res: NextApiRespo
         const videoExist = await findVideoIdByUserId(userId, videoId, token);
 
         videoExist.length
-          ? res.status(200).json({ message: "Video", video: videoExist })
+          ? res.status(200).json({ message: "Video", video: videoExist[0] })
           : res.status(200).json({ message: "Video not exist" });
       } else {
         res.status(400).json({ message: "Video id not exist" });

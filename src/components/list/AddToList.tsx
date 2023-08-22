@@ -1,4 +1,4 @@
-import { MouseEventHandler, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import RenderSVG from "../shared/RenderSVG";
 import Style from "./style.module.css";
 
@@ -24,6 +24,15 @@ const AddToList = ({ videoId }: { videoId: string }): JSX.Element => {
       },
     });
   };
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(`/api/stats?videoId=${videoId}`);
+
+      const { video } = await res.json();
+      setToggleAddToList(!!video?.favorited);
+    })();
+  }, [videoId]);
 
   return (
     <button onClick={toggleHandler} className={addToListBtn}>
