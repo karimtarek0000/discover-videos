@@ -100,6 +100,26 @@ export async function findVideoIdByUserId(userId: string, videoId: string, token
   return data?.stats;
 }
 
+export async function watched(userId: string, token: string) {
+  const operationsDoc = `
+    query Watched($userId:String!) {
+      stats(
+        where: {
+          user_id: {_eq: $userId},
+          watched: {_eq: true}}
+        ) {
+        id
+        watched
+        video_id
+      }
+    }
+  `;
+
+  const { data } = await fetchGraphQL(operationsDoc, "Watched", { userId }, token);
+
+  return data?.stats;
+}
+
 // --------------------------- User ---------------------------
 export async function createNewUser(metaData: MetaData, token: string) {
   const operationsDoc = `

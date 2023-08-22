@@ -2,16 +2,20 @@ import Card from "@/components/card/Card";
 import Header from "@/components/layout/header/Header";
 import Navbar from "@/components/layout/navbar/Navbar";
 import SectionCard from "@/components/sectionCard/SectionCard";
-import videosData from "@/lib/videos";
+import videosData, { getAllWatchedVideos } from "@/lib/videos";
 import { HomeProps } from "@/types";
 import Head from "next/head";
 
 export async function getServerSideProps() {
+  // const userId = "",
+  //   token = "";
+
   const [disneyVideos, travelVideos, productivityVideos, mostPopularVideos] = await Promise.all([
     videosData("disney trailer"),
     videosData("travel"),
     videosData("productivity"),
     videosData("mostPopular", "popular"),
+    // getAllWatchedVideos(userId, token),
   ]);
 
   return { props: { disneyVideos, travelVideos, productivityVideos, mostPopularVideos } };
@@ -39,6 +43,9 @@ export default function Home(props: HomeProps) {
       <main>
         <SectionCard head="desiny" items={disneyVideos}>
           <Card type="large" />
+        </SectionCard>
+        <SectionCard head="Watch again" items={[]}>
+          <Card type="small" />
         </SectionCard>
         <SectionCard head="travel" items={travelVideos}>
           <Card type="small" />

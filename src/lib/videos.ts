@@ -1,3 +1,4 @@
+import { watched } from "@/db/queries";
 import { Video } from "@/types";
 import fetchData from "@/utils/fetchData";
 
@@ -36,6 +37,12 @@ const videosData = async (query: string, typeURL = "videos") => {
     console.error("Somthing wrong when get videos.", error);
     return [];
   }
+};
+
+export const getAllWatchedVideos = async (userId: string, token: string) => {
+  const data = await watched(userId, token);
+
+  console.log(data);
 };
 
 export default videosData;
