@@ -6,14 +6,16 @@ export default async function updateStats(req: NextApiRequest, res: NextApiRespo
   if (req.method === "POST") {
     try {
       const token = req.cookies?.token;
-      const { favorited, watched } = req.body;
-      const videoId = req.query.videoId as string;
+      const { videoId, favorited = 0, watched = true } = req.body;
 
       // ------------------ Check if token exist ------------------------
       if (!token) return res.status(403).json({ message: "Token is not exist" });
 
+      // -------- Check if data exist in body or not --------------------
+      if (!videoId) return res.status(400).json({ message: "Some data is missing!" });
+
       // ------------------ After that check token valid ------------------------
-      return JWT.verify(token, process.env.TOKEN_SECRET_KEY as string, async (err, decoded) => {
+      return JWT.verify(token, process.env.TOKEN_SECRET_KEY!, async (err, decoded) => {
         // -------- If token not valid will return to the client status 403
         if (err) return res.status(403).json({ message: "Token is not valid" });
 

@@ -6,6 +6,7 @@ import { Video } from "@/types";
 import { useRouter } from "next/router";
 import Style from "../../styles/video.module.css";
 import AddToList from "@/components/list/AddToList";
+import Head from "next/head";
 
 const { videoWrapper, btnBack, info } = Style;
 
@@ -33,12 +34,19 @@ export async function getStaticProps({ params }: any) {
 
 const VideoDetails = ({ video }: { video: Video }): JSX.Element => {
   const { query, back } = useRouter();
+  const videoId = query.videoId as string;
 
   const { title, description, publishTime, statistics, channelTitle } = video;
 
   return (
     <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+      </Head>
+
       <Navbar />
+
       <main className={videoWrapper}>
         {/* Back */}
         <button onClick={back} className={btnBack}>
@@ -52,11 +60,11 @@ const VideoDetails = ({ video }: { video: Video }): JSX.Element => {
             typeof="text/html"
             height="360"
             className="w-full"
-            src={`https://www.youtube.com/embed/${query.videoId}?autoplay=0&controls=0&origin=http://example.com`}
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=0&controls=0&origin=http://example.com`}
           ></iframe>
 
           {/* Add on list */}
-          <AddToList />
+          <AddToList videoId={videoId} />
         </div>
 
         {/* Info */}
