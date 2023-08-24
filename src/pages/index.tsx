@@ -5,12 +5,21 @@ import SectionCard from "@/components/sectionCard/SectionCard";
 import videosData, { getAllWatchedVideos } from "@/lib/videos";
 import { HomeProps } from "@/types";
 import { verifyToken } from "@/utils/verifyToken";
-import { NextApiRequest } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 import Head from "next/head";
 
-export async function getServerSideProps({ req }: { req: NextApiRequest }) {
+export async function getServerSideProps({ req, res }: { req: NextApiRequest; res: NextApiResponse }) {
   const token = (req.cookies?.token as string) ?? null;
   const userId = verifyToken(token);
+
+  if (!userId) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
 
   const [disneyVideos, travelVideos, productivityVideos, mostPopularVideos, listVideosWatched] = await Promise.all([
     videosData("disney trailer"),
@@ -20,7 +29,18 @@ export async function getServerSideProps({ req }: { req: NextApiRequest }) {
     getAllWatchedVideos(userId, token),
   ]);
 
-  return { props: { disneyVideos, travelVideos, productivityVideos, mostPopularVideos, listVideosWatched } };
+  // For caching
+  res.setHeader("Cache-Control", "public, s-maxage=10, stale-while-revalidate=59");
+
+  return {
+    props: {
+      disneyVideos,
+      travelVideos,
+      productivityVideos,
+      mostPopularVideos,
+      listVideosWatched,
+    },
+  };
 }
 
 export default function Home(props: HomeProps) {
