@@ -4,25 +4,27 @@ import Navbar from "@/components/layout/navbar/Navbar";
 import SectionCard from "@/components/sectionCard/SectionCard";
 import videosData, { getAllWatchedVideos } from "@/lib/videos";
 import { HomeProps } from "@/types";
+import { verifyToken } from "@/utils/verifyToken";
+import { NextApiRequest } from "next";
 import Head from "next/head";
 
-export async function getServerSideProps() {
-  // const userId = "",
-  //   token = "";
+export async function getServerSideProps({ req }: { req: NextApiRequest }) {
+  const token = (req.cookies?.token as string) ?? null;
+  const userId = verifyToken(token);
 
-  const [disneyVideos, travelVideos, productivityVideos, mostPopularVideos] = await Promise.all([
+  const [disneyVideos, travelVideos, productivityVideos, mostPopularVideos, listVideosWatched] = await Promise.all([
     videosData("disney trailer"),
     videosData("travel"),
     videosData("productivity"),
     videosData("mostPopular", "popular"),
-    // getAllWatchedVideos(userId, token),
+    getAllWatchedVideos(userId, token),
   ]);
 
-  return { props: { disneyVideos, travelVideos, productivityVideos, mostPopularVideos } };
+  return { props: { disneyVideos, travelVideos, productivityVideos, mostPopularVideos, listVideosWatched } };
 }
 
 export default function Home(props: HomeProps) {
-  const { disneyVideos, travelVideos, productivityVideos, mostPopularVideos } = props;
+  const { disneyVideos, travelVideos, productivityVideos, mostPopularVideos, listVideosWatched } = props;
 
   return (
     <>
@@ -40,13 +42,16 @@ export default function Home(props: HomeProps) {
         subTitle="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim facere molestiae deserunt. Maxime, aut consequuntur eos quaerat sunt cumque aliquid!"
         videoId="qEVUtrk8_B4"
       />
+
       <main>
         <SectionCard head="desiny" items={disneyVideos}>
           <Card type="large" />
         </SectionCard>
-        <SectionCard head="Watch again" items={[]}>
-          <Card type="small" />
-        </SectionCard>
+        {listVideosWatched.length && (
+          <SectionCard head="Watch it again" items={listVideosWatched}>
+            <Card type="small" />
+          </SectionCard>
+        )}
         <SectionCard head="travel" items={travelVideos}>
           <Card type="small" />
         </SectionCard>

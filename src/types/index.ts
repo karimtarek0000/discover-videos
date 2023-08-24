@@ -38,6 +38,7 @@ export type HomeProps = {
   travelVideos: Video[];
   productivityVideos: Video[];
   mostPopularVideos: Video[];
+  listVideosWatched: [];
 };
 
 export type MetaData = {

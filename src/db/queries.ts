@@ -22,12 +22,7 @@ export async function addNewVideo(videoData: VideoDB, token: string) {
 
   const { userId, videoId, watched, favorited } = videoData;
 
-  const { data } = await fetchGraphQL(
-    operationsDoc,
-    "AddNewVideo",
-    { userId, videoId, watched, favorited },
-    token
-  );
+  const { data } = await fetchGraphQL(operationsDoc, "AddNewVideo", { userId, videoId, watched, favorited }, token);
 
   return data?.["insert_stats_one"];
 }
@@ -108,8 +103,8 @@ export async function watched(userId: string, token: string) {
           user_id: {_eq: $userId},
           watched: {_eq: true}}
         ) {
-        id
-        watched
+        id,
+        user_id,
         video_id
       }
     }

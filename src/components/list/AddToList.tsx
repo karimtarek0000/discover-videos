@@ -17,7 +17,7 @@ const AddToList = ({ videoId }: { videoId: string }): JSX.Element => {
       body: JSON.stringify({
         videoId,
         favorited: +favorited,
-        watched: true,
+        watched: favorited,
       }),
       headers: {
         "Content-Type": "application/json",

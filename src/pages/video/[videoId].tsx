@@ -7,8 +7,9 @@ import { useRouter } from "next/router";
 import Style from "../../styles/video.module.css";
 import AddToList from "@/components/list/AddToList";
 import Head from "next/head";
+import BackBtn from "@/components/shared/BackBtn";
 
-const { videoWrapper, btnBack, info } = Style;
+const { videoWrapper, info } = Style;
 
 export async function getStaticPaths() {
   const paths = ["qEVUtrk8_B4", "uYPbbksJxIg", "avz06PDqDbM"].map((videoId) => ({
@@ -33,7 +34,7 @@ export async function getStaticProps({ params }: any) {
 }
 
 const VideoDetails = ({ video }: { video: Video }): JSX.Element => {
-  const { query, back } = useRouter();
+  const { query } = useRouter();
   const videoId = query.videoId as string;
 
   const { title, description, publishTime, statistics, channelTitle } = video;
@@ -49,9 +50,7 @@ const VideoDetails = ({ video }: { video: Video }): JSX.Element => {
 
       <main className={videoWrapper}>
         {/* Back */}
-        <button onClick={back} className={btnBack}>
-          <RenderSVG name="back" size="1.5rem" />
-        </button>
+        <BackBtn />
 
         {/* Video */}
         <div className="relative w-full">

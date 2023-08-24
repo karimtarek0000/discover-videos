@@ -26,7 +26,7 @@ const videosData = async (query: string, typeURL = "videos") => {
       return {
         id: item.id?.videoId || item.id,
         title: snippet.title || "",
-        imgUrl: snippet.thumbnails.high.url,
+        imgUrl: `https://img.youtube.com/vi/${item.id?.videoId || item.id}/maxresdefault.jpg`,
         description: snippet.description,
         publishTime: snippet.publishedAt,
         channelTitle: snippet.channelTitle,
@@ -40,9 +40,11 @@ const videosData = async (query: string, typeURL = "videos") => {
 };
 
 export const getAllWatchedVideos = async (userId: string, token: string) => {
-  const data = await watched(userId, token);
+  const allVideos = await watched(userId, token);
 
-  console.log(data);
+  return allVideos?.map(({ video_id }: { video_id: string }) => {
+    return { id: video_id, imgUrl: `https://img.youtube.com/vi/${video_id}/maxresdefault.jpg` };
+  });
 };
 
 export default videosData;
