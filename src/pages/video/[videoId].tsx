@@ -1,13 +1,12 @@
 import Navbar from "@/components/layout/navbar/Navbar";
-import RenderSVG from "@/components/shared/RenderSVG";
+import AddToList from "@/components/list/AddToList";
+import BackBtn from "@/components/shared/BackBtn";
 import { formatDate } from "@/lib/formatDate";
 import videosData from "@/lib/videos";
 import { Video } from "@/types";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import Style from "../../styles/video.module.css";
-import AddToList from "@/components/list/AddToList";
-import Head from "next/head";
-import BackBtn from "@/components/shared/BackBtn";
 
 const { videoWrapper, info } = Style;
 
