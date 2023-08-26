@@ -1,8 +1,8 @@
 import { createNewUser, isNewUser } from "@/db/queries";
 import { setCookie } from "@/lib/cookies";
+import { signToken } from "@/lib/jose";
 import { magicServerAdmin } from "@/lib/magicServer";
 import { MetaData } from "@/types";
-import JWT from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function login(req: NextApiRequest, res: NextApiResponse) {
@@ -29,7 +29,7 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
           },
         };
 
-        const token = JWT.sign(data, process.env.TOKEN_SECRET_KEY as string, { expiresIn: "7d" });
+        const token = await signToken(data);
 
         // ----------------------- Check if user new or not --------------------
         const userStatus = await isNewUser(issuer as string, token);

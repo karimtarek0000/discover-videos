@@ -7,23 +7,14 @@ import { verifyToken } from "@/utils/verifyToken";
 import { NextApiRequest, NextApiResponse } from "next";
 import Head from "next/head";
 
-export async function getServerSideProps({ req, res }: { req: NextApiRequest; res: NextApiResponse }) {
-  const token = (req.cookies?.token as string) ?? null;
-  const userId = verifyToken(token);
+export async function getServerSideProps({ req }: { req: NextApiRequest }) {
+  const token = req.cookies?.token as string;
+  const userId = verifyToken(token) ?? null;
 
-  if (!userId) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
-  const listVideosWatched = await getAllWatchedVideos(userId, token);
+  const listVideosWatched = (await getAllWatchedVideos(userId, token)) || [];
 
   return {
-    props: { listVideosWatched },
+    props: { listVideosWatched: listVideosWatched ?? [] },
   };
 }
 

@@ -12,15 +12,6 @@ export async function getServerSideProps({ req, res }: { req: NextApiRequest; re
   const token = (req.cookies?.token as string) ?? null;
   const userId = verifyToken(token);
 
-  if (!userId) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
   const [disneyVideos, travelVideos, productivityVideos, mostPopularVideos, listVideosWatched] = await Promise.all([
     videosData("disney trailer"),
     videosData("travel"),
@@ -38,7 +29,7 @@ export async function getServerSideProps({ req, res }: { req: NextApiRequest; re
       travelVideos,
       productivityVideos,
       mostPopularVideos,
-      listVideosWatched,
+      listVideosWatched: listVideosWatched ?? [],
     },
   };
 }

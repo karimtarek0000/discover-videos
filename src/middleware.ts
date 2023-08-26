@@ -1,35 +1,27 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { verifyToken } from "./lib/test";
-
-// if (req.nextUrl.pathname.startsWith("/api/stats"))
+import { verifyToken } from "./lib/jose";
 
 export async function middleware(req: NextRequest) {
-  const token = req.cookies.get("token");
+  const token = req?.cookies?.get("token");
 
-  // // ------------------ Check if token exist ------------------------
-  // if (!token?.value)
-  //   return NextResponse.json(
-  //     { message: "Token is not exist" },
-  //     {
-  //       status: 403,
-  //     }
-  //   );
+  const decoded: any = await verifyToken(token?.value as string);
 
-  // // -------- Check if data exist in body or not --------------------
-  // if (!videoId)
-  //   return NextResponse.json(
-  //     { message: "Video id not exist!" },
-  //     {
-  //       status: 400,
-  //     }
-  //   );
+  const { pathname } = req.nextUrl;
 
-  const decodedToken = verifyToken(token.value);
+  if (!decoded?.payload?.issuer && pathname !== "/login") {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
 
-  console.log(decodedToken);
+  if (decoded?.payload?.issuer && pathname === "/login") {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
 
-  // const { issuer: userId } = decodedToken as any;
-
-  return NextResponse.json({ message: "Done" }, { status: 400 });
+  return NextResponse.next();
 }
+
+export const config = {
+  // Skip all paths that should not be internationalized. This example skips the
+  // folders "api", "_next" and all files with an extension (e.g. favicon.ico)
+  matcher: ["/((?!api|_next|.*\\..*).*)"],
+};
