@@ -1,7 +1,7 @@
 import cookie from "cookie";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export async function logout(req: NextApiRequest, res: NextApiResponse) {
+export default async function logout(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
     const cookieOptions = {
       expires: new Date(0),
