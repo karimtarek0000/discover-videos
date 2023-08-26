@@ -1,5 +1,5 @@
 .navbar {
-  @apply fixed top-0 z-20 w-full bg-black bg-opacity-20 h-fit;
+  @apply top-0 z-20 w-full bg-black bg-opacity-20 h-fit;
 }
 .navbarWrapper {
   @apply container flex items-center py-5;

@@ -1,13 +1,13 @@
 import Logo from "@/components/shared/logo/Logo";
+import { magic } from "@/lib/maginLinkClient";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import DropDown from "../dropdown/DropDown";
 import Style from "./navbar.module.css";
-import { useEffect, useState } from "react";
-import { magic } from "@/lib/maginLinkClient";
 
-const { navbar, navbarWrapper, links, button } = Style;
+const { navbar, navbarWrapper, links } = Style;
 
-const Navbar = (): JSX.Element => {
+const Navbar = ({ classes }: { classes?: string }): JSX.Element => {
   const [email, setEmail] = useState<string>("");
 
   useEffect(() => {
@@ -24,13 +24,13 @@ const Navbar = (): JSX.Element => {
   }, []);
 
   return (
-    <nav className={navbar}>
+    <nav className={`${classes} ${navbar}`}>
       <div className={navbarWrapper}>
         <Logo classNames="lg:me-[12.5rem]" />
 
         <div className={links}>
           <Link href="/">Home</Link>
-          <Link href="/">My list</Link>
+          <Link href="/brows/my-list">My list</Link>
         </div>
 
         {/* <button className={button}>Sign up</button> */}

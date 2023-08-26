@@ -1,5 +1,5 @@
 .videoWrapper {
-  @apply flex flex-col items-end mt-[6.25rem] overflow-auto md:w-[50rem] max-w-[50rem] mx-auto px-3 max-h-[85vh] h-[85vh];
+  @apply flex flex-col items-end overflow-auto md:w-[50rem] max-w-[50rem] mx-auto px-3 max-h-[85vh] h-[85vh];
 }
 .btnBack {
   @apply self-start my-5 text-white;

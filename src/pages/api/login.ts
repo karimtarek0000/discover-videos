@@ -15,9 +15,7 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
         const didToken = getToken.split(" ")[1];
 
         // ----------------------- Get user data from token magic link --------------------
-        const { email, issuer, publicAddress } = await magicServerAdmin.users.getMetadataByToken(
-          didToken as string
-        );
+        const { email, issuer, publicAddress } = await magicServerAdmin.users.getMetadataByToken(didToken as string);
 
         // ----------------------- Create token and send this token to hasura --------------------
         const data = {

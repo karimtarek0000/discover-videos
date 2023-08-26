@@ -53,7 +53,7 @@ export default function Home(props: HomeProps) {
         <meta name="description" content="Discover videos" />
       </Head>
 
-      <Navbar />
+      <Navbar classes="fixed" />
 
       <Header
         title="john wick"

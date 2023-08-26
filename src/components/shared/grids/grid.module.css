@@ -1,3 +1,6 @@
 .grids {
   @apply flex gap-2 px-5 pt-10 overflow-x-scroll max-md:ps-3;
 }
+.grids--list {
+  @apply grid grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-4 auto-rows-fr;
+}

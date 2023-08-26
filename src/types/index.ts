@@ -13,6 +13,7 @@ export type CardProps = {
   title: string;
   imgUrl: string;
   type?: "small" | "medium" | "large";
+  className?: string;
 };
 
 export type SectionCardProps = {

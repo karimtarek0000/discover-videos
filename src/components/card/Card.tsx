@@ -8,7 +8,7 @@ import { m } from "framer-motion";
 const { card, cardSmall, cardMedium, cardLarge } = Style;
 
 const Card = (props: CardProps): JSX.Element => {
-  const { id: videoID, title, imgUrl, type = "small" } = props;
+  const { id: videoID, title, imgUrl, type = "small", className } = props;
   const [imgSrc, setImgSrc] = useState<string>(imgUrl as string);
 
   const cardStyle: any = {
@@ -24,7 +24,7 @@ const Card = (props: CardProps): JSX.Element => {
 
   return (
     <m.div whileHover={{ scale: 1.1 }}>
-      <Link href={`/video/${videoID}`} className={`${card} ${cardStyle[type]}`}>
+      <Link href={`/video/${videoID}`} className={`${card} ${cardStyle[type]} ${className}`}>
         <Image
           src={imgSrc}
           alt={title}
