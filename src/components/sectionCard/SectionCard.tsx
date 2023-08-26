@@ -1,5 +1,4 @@
 import { SectionCardProps } from "@/types";
-import { m } from "framer-motion";
 import Grids from "../shared/grids/Grids";
 
 const SectionCard = (props: SectionCardProps): JSX.Element => {
