@@ -30,7 +30,7 @@ export default function MyList(props: HomeProps) {
 
       <Navbar />
 
-      <main className="container">
+      <main className="container min-h-[83vh]">
         <h2 className="mt-3 mb-5 text-white capitalize max-md:text-center text-40">my list</h2>
 
         <div>

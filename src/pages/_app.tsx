@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/footer/Footer";
 import "@/styles/globals.css";
 import { LazyMotion, domAnimation } from "framer-motion";
 import type { AppProps } from "next/app";
@@ -15,6 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
       `}</style>
       <LazyMotion features={domAnimation}>
         <Component {...pageProps} />
+        <Footer />
       </LazyMotion>
     </>
   );
