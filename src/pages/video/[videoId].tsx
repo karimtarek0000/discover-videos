@@ -81,7 +81,7 @@ const VideoDetails = ({ video }: { video: Video }): JSX.Element => {
               {channelTitle}
             </p>
             <p>
-              <span className="text-gray-400">View count: </span> {statistics.viewCount}
+              <span className="text-gray-400">View count: </span> {statistics?.viewCount}
             </p>
           </div>
         </div>

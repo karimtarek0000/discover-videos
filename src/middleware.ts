@@ -7,19 +7,30 @@ export async function middleware(req: NextRequest) {
 
   const decoded: any = await verifyToken(token?.value as string);
 
-  const { pathname } = req.nextUrl;
-
-  if (!decoded?.payload?.issuer && pathname !== "/login") {
-    return NextResponse.redirect(new URL("/login", req.url));
+  if (req.nextUrl.pathname.match("/login")) {
+    if (decoded?.payload?.issuer) return NextResponse.redirect(new URL("/", req.url));
   }
 
-  if (decoded?.payload?.issuer && pathname === "/login") {
-    return NextResponse.redirect(new URL("/", req.url));
+  if (!req.nextUrl.pathname.match("/login")) {
+    if (!decoded?.payload?.issuer) return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  return NextResponse.next();
+  // if (decoded?.payload?.issuer) {
+  //   if (req.nextUrl.pathname.match("/login")) {
+  //     return NextResponse.redirect(new URL("/", req.url));
+  //   }
+  // }
+  // if (!decoded?.payload?.issuer && !req.nextUrl.pathname.match("/login")) {
+  //   return NextResponse.redirect(new URL("/login", req.url));
+  // }
+
+  // if (decoded?.payload?.issuer && req.nextUrl.pathname.match("/login")) {
+  //   return NextResponse.redirect(new URL("/", req.url));
+  // }
+
+  // return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/", "/login", "/brows/my-list"],
+  matcher: ["/((?!api|_next|.*\\..*).*)"],
 };
