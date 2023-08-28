@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import JWT from "jsonwebtoken";
 import { addNewVideo, findVideoIdByUserId, updateVideo } from "@/db/queries";
+import { verifyToken } from "@/lib/jose";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function updateStats(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -10,7 +10,8 @@ export default async function updateStats(req: NextApiRequest, res: NextApiRespo
     if (!token) return res.status(403).json({ message: "Token is not exist" });
 
     // ------------------ After that check token is valid ------------------------
-    const decoded: any = JWT.verify(token, process.env.TOKEN_SECRET_KEY!);
+    const decoded: any = await verifyToken(token);
+
     if (!decoded.issuer) return res.status(400).json({ message: "Token is not valid" });
 
     const { issuer: userId } = decoded as any;
@@ -41,9 +42,7 @@ export default async function updateStats(req: NextApiRequest, res: NextApiRespo
       if (videoId) {
         const videoExist = await findVideoIdByUserId(userId, videoId, token);
 
-        videoExist.length
-          ? res.status(200).json({ message: "Video", video: videoExist[0] })
-          : res.status(200).json({ message: "Video not exist" });
+        videoExist.length ? res.status(200).json({ message: "Video", video: videoExist[0] }) : res.status(200).json({ message: "Video not exist" });
       } else {
         res.status(400).json({ message: "Video id not exist" });
       }

@@ -10,14 +10,14 @@ import Head from "next/head";
 
 export async function getServerSideProps({ req, res }: { req: NextApiRequest; res: NextApiResponse }) {
   const token = req?.cookies?.token as string;
-  const { issuer: userId }: any = await verifyToken(token);
+  const { payload }: any = await verifyToken(token);
 
   const [disneyVideos, travelVideos, productivityVideos, mostPopularVideos, listVideosWatched] = await Promise.all([
     videosData("disney trailer"),
     videosData("travel"),
     videosData("productivity"),
     videosData("mostPopular", "popular"),
-    getAllWatchedVideos(userId, token),
+    getAllWatchedVideos(payload?.issuer, token),
   ]);
 
   // For caching
@@ -58,7 +58,7 @@ export default function Home(props: HomeProps) {
         <SectionCard head="desiny" items={disneyVideos}>
           <Card type="large" />
         </SectionCard>
-        {listVideosWatched.length && (
+        {listVideosWatched?.length && (
           <SectionCard head="Watch it again" items={listVideosWatched}>
             <Card type="small" />
           </SectionCard>

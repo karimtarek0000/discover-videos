@@ -9,9 +9,9 @@ import Head from "next/head";
 
 export async function getServerSideProps({ req }: { req: NextApiRequest }) {
   const token = req.cookies?.token as string;
-  const { issuer: userId }: any = await verifyToken(token);
+  const { payload }: any = await verifyToken(token);
 
-  const listVideosWatched = (await getAllWatchedVideos(userId, token)) || [];
+  const listVideosWatched = (await getAllWatchedVideos(payload?.issuer, token)) || [];
 
   return {
     props: { listVideosWatched: listVideosWatched ?? [] },
