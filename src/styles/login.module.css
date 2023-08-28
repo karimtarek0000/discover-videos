@@ -1,5 +1,5 @@
 .formWrapper {
-  @apply px-2 py-5 absolute top-2/4 -translate-y-2/4 left-2/4 -translate-x-2/4 bg-black bg-opacity-75 w-[500px] rounded-lg;
+  @apply px-2 py-5 absolute top-2/4 -translate-y-2/4 left-2/4 -translate-x-2/4 bg-black bg-opacity-75 w-full sm:w-[31.25rem] rounded-lg;
 }
 .formWrapper form {
   @apply max-w-[90%] mx-auto;
