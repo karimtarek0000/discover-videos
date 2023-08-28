@@ -4,13 +4,13 @@ import Navbar from "@/components/layout/navbar/Navbar";
 import SectionCard from "@/components/sectionCard/SectionCard";
 import videosData, { getAllWatchedVideos } from "@/lib/videos";
 import { HomeProps } from "@/types";
-import { verifyToken } from "@/utils/verifyToken";
+import { verifyToken } from "@/lib/jose";
 import { NextApiRequest, NextApiResponse } from "next";
 import Head from "next/head";
 
 export async function getServerSideProps({ req, res }: { req: NextApiRequest; res: NextApiResponse }) {
-  const token = (req.cookies?.token as string) ?? null;
-  const userId = verifyToken(token);
+  const token = req?.cookies?.token as string;
+  const { issuer: userId }: any = await verifyToken(token);
 
   const [disneyVideos, travelVideos, productivityVideos, mostPopularVideos, listVideosWatched] = await Promise.all([
     videosData("disney trailer"),

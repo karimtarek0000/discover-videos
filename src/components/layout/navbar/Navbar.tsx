@@ -14,7 +14,7 @@ const Navbar = ({ classes }: { classes?: string }): JSX.Element => {
   const linksNav = [
     {
       name: "Home",
-      href: "/",
+      href: "/home",
     },
     {
       name: "My list",

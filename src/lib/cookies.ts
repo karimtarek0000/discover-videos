@@ -7,7 +7,7 @@ export const setCookie = (token: string, res: NextApiResponse) => {
   const setCookie = cookie.serialize("token", token, {
     maxAge,
     expires: new Date(Date.now() + maxAge * 1000),
-    // secure: process.env.NODE_ENV === "production",
+    secure: process.env.NODE_ENV === "production",
     path: "/",
     httpOnly: true,
   });

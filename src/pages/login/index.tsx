@@ -48,22 +48,24 @@ const Login = (): JSX.Element => {
 
       const didToken = await magic.auth.loginWithMagicLink({ email });
 
-      await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${didToken}`,
-          "Content-Type": "application/json",
-        },
-      });
+      if (didToken) {
+        const s = await fetch("/api/login", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${didToken}`,
+            "Content-Type": "application/json",
+          },
+        });
 
-      router.push("/");
+        router.replace("/home");
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
   return (
-    <main className="relative ">
+    <main className="relative">
       <Head>
         <title>Netflix | Login</title>
       </Head>
