@@ -50,7 +50,7 @@ export default function Home(props: HomeProps) {
         title="john wick"
         type="movies"
         imgUrl="/images/john-wick.jpg"
-        subTitle="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim facere molestiae deserunt. Maxime, aut consequuntur eos quaerat sunt cumque aliquid!"
+        subTitle="John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes."
         videoId="qEVUtrk8_B4"
       />
 
