@@ -8,7 +8,7 @@ import { m } from "framer-motion";
 const { card, cardSmall, cardMedium, cardLarge } = Style;
 
 const Card = (props: CardProps): JSX.Element => {
-  const { id: videoID, title, imgUrl, type = "small", className } = props;
+  const { id: videoID, title = "image", imgUrl, type = "small", className } = props;
   const [imgSrc, setImgSrc] = useState<string>(imgUrl as string);
 
   const cardStyle: any = {

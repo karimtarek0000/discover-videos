@@ -35,9 +35,7 @@ const Login = (): JSX.Element => {
     }
   }, [email]);
 
-  const changeEmailHandler: ChangeEventHandler<HTMLInputElement> = (
-    e: ChangeEvent<HTMLInputElement>
-  ) => {
+  const changeEmailHandler: ChangeEventHandler<HTMLInputElement> = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
@@ -94,21 +92,11 @@ const Login = (): JSX.Element => {
         <form>
           <div className={inputWrapper}>
             <label htmlFor="email">Enter your email</label>
-            <input
-              autoComplete="off"
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-              onChange={changeEmailHandler}
-            />
+            <input autoComplete="off" id="email" type="email" placeholder="Enter your email" onChange={changeEmailHandler} />
             <p className="mt-2 text-center text-white">{err}</p>
           </div>
 
-          <button
-            onClick={loginHandler}
-            disabled={!statusEmail}
-            className={`flex items-center justify-center gap-x-1 ${loginBtn}`}
-          >
+          <button onClick={loginHandler} disabled={!statusEmail} className={`flex items-center justify-center gap-x-1 ${loginBtn}`}>
             Sign in
             {loading && <span className="loader"></span>}
           </button>

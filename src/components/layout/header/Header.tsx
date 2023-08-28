@@ -9,7 +9,7 @@ const { header, image, info, infoWrapper, titleInfo, subTitleInfo, button } = St
 
 const Header = (props: HeaderProps): JSX.Element => {
   const router = useRouter();
-  const { title, subTitle, type = "series", imgUrl, videoId } = props;
+  const { title = "image", subTitle, type = "series", imgUrl, videoId } = props;
 
   const playHandler: MouseEventHandler = (): void => {
     router.push(`/video/${videoId}`);
