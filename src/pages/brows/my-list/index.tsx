@@ -1,15 +1,15 @@
 import Card from "@/components/card/Card";
 import Navbar from "@/components/layout/navbar/Navbar";
 import Grids from "@/components/shared/grids/Grids";
+import { verifyToken } from "@/lib/jose";
 import { getAllWatchedVideos } from "@/lib/videos";
 import { HomeProps } from "@/types";
-import { verifyToken } from "@/utils/verifyToken";
 import { NextApiRequest, NextApiResponse } from "next";
 import Head from "next/head";
 
 export async function getServerSideProps({ req }: { req: NextApiRequest }) {
   const token = req.cookies?.token as string;
-  const userId = verifyToken(token) ?? null;
+  const { issuer: userId }: any = await verifyToken(token);
 
   const listVideosWatched = (await getAllWatchedVideos(userId, token)) || [];
 
