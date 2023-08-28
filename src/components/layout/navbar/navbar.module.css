@@ -5,7 +5,7 @@
   @apply container flex items-center px-2 py-5 max-md:flex-wrap;
 }
 .links {
-  @apply mt-10 space-x-4 text-white capitalize max-md:order-last max-md:w-full max-md:text-center text-18;
+  @apply space-x-4 text-white capitalize max-md:mt-10 max-md:order-last max-md:w-full max-md:text-center text-18;
 }
 .button {
   @apply px-5 py-2 text-white rounded-md ms-auto bg-secondary;
