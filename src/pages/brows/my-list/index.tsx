@@ -31,7 +31,7 @@ export default function MyList(props: HomeProps) {
       <Navbar />
 
       <main className="container">
-        <h2 className="mt-3 mb-5 text-white capitalize text-40">my list</h2>
+        <h2 className="mt-3 mb-5 text-white capitalize max-md:text-center text-40">my list</h2>
 
         <div>
           <Grids items={listVideosWatched} className="grids--list">

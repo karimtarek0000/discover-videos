@@ -33,7 +33,6 @@ const Navbar = ({ classes }: { classes?: string }): JSX.Element => {
           <Link href="/brows/my-list">My list</Link>
         </div>
 
-        {/* <button className={button}>Sign up</button> */}
         <DropDown email={email} />
       </div>
     </nav>

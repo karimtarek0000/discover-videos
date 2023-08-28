@@ -54,7 +54,7 @@ export default function Home(props: HomeProps) {
         videoId="qEVUtrk8_B4"
       />
 
-      <main>
+      <main className="max-md:px-2">
         <SectionCard head="desiny" items={disneyVideos}>
           <Card type="large" />
         </SectionCard>
