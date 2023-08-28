@@ -19,7 +19,7 @@ const DropDown = ({ email }: { email: string }): JSX.Element => {
       setLoading(true);
       await magic.user.logout();
       await fetch("/api/logout");
-      router.replace("/login");
+      router.push("/login");
       setLoading(false);
     } catch (err) {
       console.log("Error: ", err);
