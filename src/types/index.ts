@@ -9,11 +9,11 @@ export type HeaderProps = {
 };
 
 export type CardProps = {
-  id: string;
-  title: string;
-  imgUrl: string;
+  id?: string;
+  title?: string;
+  imgUrl?: string;
   type?: "small" | "medium" | "large";
-  className?: string;
+  classes?: string;
 };
 
 export type SectionCardProps = {

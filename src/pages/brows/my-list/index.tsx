@@ -35,7 +35,7 @@ export default function MyList(props: HomeProps) {
 
         <div>
           <Grids items={listVideosWatched} className="grids--list">
-            <Card className="!w-full" />
+            <Card classes="!w-full" />
           </Grids>
         </div>
       </main>
