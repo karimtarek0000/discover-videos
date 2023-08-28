@@ -56,7 +56,7 @@ const Login = (): JSX.Element => {
         },
       });
 
-      router.push("/");
+      router.replace("/");
     } catch (err) {
       console.log(err);
     }
