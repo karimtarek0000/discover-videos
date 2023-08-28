@@ -5,6 +5,8 @@ export default async function logout(req: NextApiRequest, res: NextApiResponse) 
   if (req.method === "GET") {
     const cookieOptions = {
       expires: new Date(0),
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
       httpOnly: true,
     };
 

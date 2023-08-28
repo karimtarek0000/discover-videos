@@ -18,10 +18,11 @@ const DropDown = ({ email }: { email: string }): JSX.Element => {
     try {
       setLoading(true);
       await magic.user.logout();
+      await fetch("/api/logout");
       router.replace("/login");
       setLoading(false);
     } catch (err) {
-      console.log(err);
+      console.log("Error: ", err);
     }
   };
 
@@ -35,11 +36,7 @@ const DropDown = ({ email }: { email: string }): JSX.Element => {
       {toggle && (
         <div className={dropdownList}>
           <RenderSVG name="logout" size="1rem" />
-          <button
-            onClick={logoutHandler}
-            disabled={loading}
-            className={`flex items-center justify-center gap-x-1`}
-          >
+          <button onClick={logoutHandler} disabled={loading} className={`flex items-center justify-center gap-x-1`}>
             Logout
             {loading && <span className="loader"></span>}
           </button>
