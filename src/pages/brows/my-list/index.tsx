@@ -24,8 +24,8 @@ export default function MyList(props: HomeProps) {
   return (
     <>
       <Head>
-        <title>Netflix</title>
-        <meta name="description" content="List videos" />
+        <title>Netflix | My list</title>
+        <meta name="description" content="My watched List videos" />
       </Head>
 
       <Navbar />
