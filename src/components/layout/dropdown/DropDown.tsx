@@ -35,8 +35,8 @@ const DropDown = ({ email }: { email: string }): JSX.Element => {
 
       {toggle && (
         <div className={dropdownList}>
-          <RenderSVG name="logout" size="1rem" />
           <button onClick={logoutHandler} disabled={loading} className={`flex items-center justify-center gap-x-1`}>
+            <RenderSVG name="logout" size="1rem" />
             Logout
             {loading && <span className="loader"></span>}
           </button>

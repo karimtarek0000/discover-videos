@@ -68,7 +68,7 @@ const VideoDetails = ({ video }: { video: Video }): JSX.Element => {
         {/* Info */}
         <div className={info}>
           {/* Col 1 */}
-          <div className="md:basis-[70%]">
+          <div className="md:basis-[70%] max-w-full">
             <h3>{formatDate(publishTime)}</h3>
             <h2 className="my-3 text-25">{title}</h2>
             <p className="text-18 max-h-[300px] overflow-auto text-gray-400">{description}</p>

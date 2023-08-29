@@ -32,7 +32,9 @@ const Navbar = ({ classes }: { classes?: string }): JSX.Element => {
       }
     };
 
-    userInfo();
+    if (email === "") {
+      userInfo();
+    }
   }, []);
 
   return (

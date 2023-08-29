@@ -8,5 +8,5 @@
   @apply hover:-translate-x-[5px] transition-transform duration-150;
 }
 .info {
-  @apply flex justify-between mt-5 text-white max-md:px-5 max-lg:flex-wrap;
+  @apply flex justify-between w-full mt-5 text-white max-lg:flex-wrap;
 }
