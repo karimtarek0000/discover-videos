@@ -1,4 +1,4 @@
-## Site like NETFLIX | Next js
+## Discover movies (Style like NETFLIX) | Next js
 
 - Next 13
 - Typescript
