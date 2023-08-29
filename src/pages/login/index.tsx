@@ -49,15 +49,16 @@ const Login = (): JSX.Element => {
       const didToken = await magic.auth.loginWithMagicLink({ email });
 
       if (didToken) {
-        const s = await fetch("/api/login", {
+        await fetch("/api/login", {
           method: "POST",
           headers: {
             Authorization: `Bearer ${didToken}`,
             "Content-Type": "application/json",
           },
         });
-
         router.replace("/home");
+      } else {
+        router.replace("/login");
       }
     } catch (err) {
       console.log(err);
