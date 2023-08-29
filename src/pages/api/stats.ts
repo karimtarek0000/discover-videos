@@ -12,9 +12,9 @@ export default async function updateStats(req: NextApiRequest, res: NextApiRespo
     // ------------------ After that check token is valid ------------------------
     const decoded: any = await verifyToken(token);
 
-    if (!decoded.issuer) return res.status(400).json({ message: "Token is not valid" });
+    if (!decoded?.payload?.issuer) return res.status(400).json({ message: "Token is not valid" });
 
-    const { issuer: userId } = decoded as any;
+    const { issuer: userId } = decoded.payload as any;
 
     // ----- POST -----
     if (req.method === "POST") {
